@@ -1,0 +1,37 @@
+version: '3.7'
+services:
+  web:
+    image: 'gitlab/gitlab-ce:latest'
+    restart: always
+    hostname: ${HOSTNAME}
+    container_name: ${GITLAB_CE_CONTAINER_NAME}
+    environment:
+      GITLAB_ROOT_PASSWORD: ${ROOT_PASSWORD}
+      GITLAB_OMNIBUS_CONFIG: |
+        external_url ${EXTERNAL_URL}:${HTTP_PORT}
+        nginx['listen_port'] = 80
+        nginx['listen_https'] = false
+    ports:
+      -  ${HTTP_PORT}:80
+      -  ${HTTPS_PORT}:443
+    volumes:
+      - './config:/etc/gitlab'
+      - './logs:/var/log/gitlab'
+      - './data:/var/opt/gitlab'
+    networks:
+      - gitlab
+  gitlab-runner:
+    image: gitlab/gitlab-runner:alpine
+    container_name: ${GITLAB_CONTAINER_CONTAINER_NAME}
+    restart: always
+    depends_on:
+      - web
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - './gitlab-runner:/etc/gitlab-runner'
+      - ./config.toml:/etc/gitlab-runner/config.toml
+    networks:
+      - gitlab
+networks:
+  gitlab:
+    name: gitlab-network

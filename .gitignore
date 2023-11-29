@@ -1,0 +1,7 @@
+config.toml
+config/
+data/
+logs/
+.idea
+.env
+registry.gitlab.com-gitlab-org-gitlab-runner-gitlab-runner-helper
