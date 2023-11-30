@@ -22,7 +22,7 @@ services:
       - gitlab
   gitlab-runner:
     image: gitlab/gitlab-runner:alpine
-    container_name: ${GITLAB_CONTAINER_CONTAINER_NAME}
+    container_name: ${GITLAB_RUNNER_CONTAINER_NAME}
     restart: always
     depends_on:
       - web
