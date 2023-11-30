@@ -15,7 +15,7 @@ docker-compose up -d
 ````bash
 docker exec -it gitlab-ce grep 'Password:' /etc/gitlab/initial_root_password
 ````
-Now the gitlab is available with the username ****root**** on ****server-ip:8080****
+Now the gitlab is available with ****root**** username on ****server-ip:8080****
 
 ## Gitlab runner
 ````bash
