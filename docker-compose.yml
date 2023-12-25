@@ -28,7 +28,6 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - './gitlab-runner:/etc/gitlab-runner'
-      - ./config.toml:/etc/gitlab-runner/config.toml
     networks:
       - gitlab
 networks:
